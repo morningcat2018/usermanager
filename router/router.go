@@ -9,7 +9,8 @@ import (
 )
 
 func Router() *gin.Engine {
-	// gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(gin.ReleaseMode)
+
 	r := gin.Default()
 	r.Use(gin.LoggerWithConfig(logger.LoggerToFile()))
 	r.Use(logger.Recover)

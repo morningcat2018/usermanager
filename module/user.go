@@ -3,6 +3,7 @@ package module
 import (
 	"fmt"
 	"usermanager/dao"
+	"usermanager/pkg/logger"
 
 	"gorm.io/gorm"
 )
@@ -17,23 +18,26 @@ func (u UserModule) TableName() string {
 	return "sys_user"
 }
 
+func init() {
+	dao.GetDB().AutoMigrate(&UserModule{})
+}
+
 func AddUser(name string, age uint8) uint {
-	fmt.Println("module user AddUser")
+	logger.Debug(map[string]interface{}{"AddUser name": name, "age": age})
 	user := UserModule{Name: name, Age: age}
-	fmt.Println(dao.Db)
-	result := dao.Db.Create(&user) // 通过数据的指针来创建
+
+	result := dao.GetDB().Create(&user) // 通过数据的指针来创建
 	if result.Error != nil {
-		fmt.Println("add user error")
-		fmt.Println(result.Error)
+		logger.Error(map[string]interface{}{"AddUser error": result.Error})
 		panic("add user error")
 	}
 	return user.ID
 }
 
 func GetUserById(id int) (u UserModule) {
-	err := dao.Db.Where("id=?", id).First(&u).Error
+	err := dao.GetDB().Where("id=?", id).First(&u).Error
 	if err != nil {
-		panic("未找到id")
+		panic(fmt.Sprintf("未找到id:%d", id))
 	}
 	return
 }

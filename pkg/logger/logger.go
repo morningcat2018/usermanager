@@ -20,7 +20,7 @@ func init() {
 	logrus.SetReportCaller(false)
 }
 
-func Write(msg string, filename string) {
+func Write(msg interface{}, filename string) {
 	setOutPutFile(logrus.InfoLevel, filename)
 	logrus.Info(msg)
 }

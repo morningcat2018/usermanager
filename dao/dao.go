@@ -37,4 +37,16 @@ func init() {
 	// SetConnMaxLifetime sets the maximum amount of time a connection may be reused.
 	SqlDB.SetConnMaxLifetime(time.Hour)
 	logger.Write("dao init over", "mydebug")
+	logger.Write(Db, "mydebug")
+}
+
+func GetDB() *gorm.DB {
+	Db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+	if err != nil {
+		panic("failed to connect database")
+	}
+	if Db.Error != nil {
+		panic("database error ")
+	}
+	return Db
 }
