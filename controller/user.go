@@ -43,7 +43,7 @@ func (u UserController) PutUser(c *gin.Context) {
 		return
 	}
 	// fmt.Println(param)
-	uid := module.AddUser(&module.UserModule{Name: param.UserName, Age: param.Age})
+	uid := module.AddUser(param.UserName, param.Age)
 	Success(c, uid, 1)
 }
 

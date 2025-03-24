@@ -17,13 +17,13 @@ func (u UserModule) TableName() string {
 	return "sys_user"
 }
 
-func AddUser(user *UserModule) uint {
-	if user == nil {
-		fmt.Println(user)
-		panic("add user is null")
-	}
-	result := dao.Db.Create(user) // 通过数据的指针来创建
+func AddUser(name string, age uint8) uint {
+	fmt.Println("module user AddUser")
+	user := UserModule{Name: name, Age: age}
+	fmt.Println(dao.Db)
+	result := dao.Db.Create(&user) // 通过数据的指针来创建
 	if result.Error != nil {
+		fmt.Println("add user error")
 		fmt.Println(result.Error)
 		panic("add user error")
 	}
