@@ -1,14 +1,15 @@
 package main
 
 import (
-	"fmt"
+	"usermanager/pkg/logger"
 	"usermanager/router"
 )
 
 func main() {
+
 	err := router.Router().Run(":8088")
 	if err != nil {
-		fmt.Println(err.Error())
+		logger.Error(map[string]interface{}{"main error": err.Error()})
 		return
 	}
 }

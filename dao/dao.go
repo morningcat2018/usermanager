@@ -2,8 +2,9 @@ package dao
 
 import (
 	"database/sql"
-	"fmt"
 	"time"
+
+	"usermanager/pkg/logger"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -15,12 +16,15 @@ var (
 )
 
 func init() {
-	fmt.Println("dao init")
+	logger.Write("dao init", "mydebug")
 	//dsn := "user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local"
 	//db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	Db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
+	}
+	if Db.Error != nil {
+		panic("database error ")
 	}
 	SqlDB, err := Db.DB()
 	if err != nil {
@@ -32,6 +36,5 @@ func init() {
 	SqlDB.SetMaxOpenConns(100)
 	// SetConnMaxLifetime sets the maximum amount of time a connection may be reused.
 	SqlDB.SetConnMaxLifetime(time.Hour)
-	fmt.Println(Db)
-	fmt.Println("dao init over")
+	logger.Write("dao init over", "mydebug")
 }
