@@ -3,6 +3,7 @@ package controller
 import (
 	"strconv"
 	"usermanager/module"
+	"usermanager/pkg/logger"
 
 	"github.com/gin-gonic/gin"
 )
@@ -42,7 +43,7 @@ func (u UserController) PutUser(c *gin.Context) {
 		Fail(c, err.Error())
 		return
 	}
-	// fmt.Println(param)
+	logger.Debug(map[string]interface{}{"param:": param})
 	uid := module.AddUser(param.UserName, param.Age)
 	Success(c, uid, 1)
 }

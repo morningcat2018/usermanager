@@ -1,0 +1,4 @@
+2025-03-28 01:33:26 - ::1 "GET /user/info/3 HTTP/1.1 200 1.065151ms "PostmanRuntime/7.33.0" "
+2025-03-28 01:33:36 - ::1 "POST /user/put HTTP/1.1 200 2.758962ms "PostmanRuntime/7.33.0" "
+2025-03-28 01:33:41 - ::1 "POST /user/put HTTP/1.1 200 1.630651ms "PostmanRuntime/7.33.0" "
+2025-03-28 01:33:48 - ::1 "GET /user/info/5 HTTP/1.1 200 271.392µs "PostmanRuntime/7.33.0" "

@@ -19,14 +19,14 @@ func (u UserModule) TableName() string {
 }
 
 func init() {
-	dao.GetDB().AutoMigrate(&UserModule{})
+	dao.Db.AutoMigrate(&UserModule{})
 }
 
 func AddUser(name string, age uint8) uint {
 	logger.Debug(map[string]interface{}{"AddUser name": name, "age": age})
 	user := UserModule{Name: name, Age: age}
 
-	result := dao.GetDB().Create(&user) // 通过数据的指针来创建
+	result := dao.Db.Create(&user) // 通过数据的指针来创建
 	if result.Error != nil {
 		logger.Error(map[string]interface{}{"AddUser error": result.Error})
 		panic("add user error")
@@ -35,7 +35,7 @@ func AddUser(name string, age uint8) uint {
 }
 
 func GetUserById(id int) (u UserModule) {
-	err := dao.GetDB().Where("id=?", id).First(&u).Error
+	err := dao.Db.Where("id=?", id).First(&u).Error
 	if err != nil {
 		panic(fmt.Sprintf("未找到id:%d", id))
 	}
