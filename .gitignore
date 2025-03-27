@@ -1,4 +1,4 @@
-./runtime/log/*
-./demo/*
+/runtime/log/*
+/demo/*
 .DS_Store
 /**/.DS_Store
